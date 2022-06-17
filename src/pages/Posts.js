@@ -1,5 +1,5 @@
 import React from 'react'
-import {Outlet} from "react-router-dom"
+import {Outlet, Link} from "react-router-dom"
 
 export default function Posts() {
   return (
@@ -17,8 +17,15 @@ export default function Posts() {
                 <div className="col-md-10 col-lg-8 col-xl-7">
                     {/* <!-- Post preview--> */}
                     <div className="post-preview">
+                        
                         <a href="post.html">
+                    <Link
+                        style={{ display: "block", margin: "1rem 0",  }}
+                        to={`/posts/1`}
+                        key={1}
+                    >
                             <h2 className="post-title">Man must explore, and this is exploration at its greatest</h2>
+                    </Link>
                             <h3 className="post-subtitle">Problems look mighty small from 150 miles up</h3>
                         </a>
                         <p className="post-meta">

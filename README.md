@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+# BlogProject - Frontend
+This project is the frontend code of [BlogProject](https://github.com/VonHumbolt/BlogProject). It use React for frontend.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
