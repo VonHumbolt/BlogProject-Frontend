@@ -1,8 +1,11 @@
 import React from 'react'
 import { Route,Routes } from 'react-router-dom'
+import CreatePost from '../pages/CreatePost'
 import Login from '../pages/Login'
 import PostDetail from '../pages/PostDetail'
 import Posts from '../pages/Posts'
+import Profile from '../pages/Profile'
+import Register from '../pages/Register'
 
 export default function Dashboard() {
   return (
@@ -15,6 +18,9 @@ export default function Dashboard() {
             </Route>
             <Route path="posts/:postId" element={<PostDetail />} />
             <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="profile/:userId" element={<Profile />} />
+            <Route path="createPost/:userId" element={<CreatePost />} />
             <Route
                 path="*"
                 element={

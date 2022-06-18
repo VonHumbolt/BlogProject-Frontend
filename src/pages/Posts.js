@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Outlet, Link} from "react-router-dom"
+import PostService from '../services/PostService'
 
 export default function Posts() {
+
+    const [posts, setPosts] = useState([])
+    useEffect(() => {
+        let postService = new PostService();
+        postService.getall().then(result => setPosts(result.data).catch(()=> console.log("error")))
+    }, [])
   return (
     <div className="container px-4 px-lg-5">
-          
+          {console.log(posts)}
             <div className="row gx-4 gx-lg-5 justify-content-center">
                 <div className="col-md-10 col-lg-8 col-xl-7">
                     <div className="site-heading">
@@ -22,7 +29,6 @@ export default function Posts() {
                     <Link
                         style={{ display: "block", margin: "1rem 0",  }}
                         to={`/posts/1`}
-                        key={1}
                     >
                             <h2 className="post-title">Man must explore, and this is exploration at its greatest</h2>
                     </Link>

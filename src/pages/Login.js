@@ -4,17 +4,17 @@ import image from "../images/blog_8.jpg";
 export default function Login() {
   return (
 
-    <div className="d-lg-flex half mt-2">
-      <div className="bg order-1 order-md-2"> <img className="img-fluid" src={image} style={{width:"100vh"}} />  </div>
+    <div className="d-lg-flex half mt-2 align-items-center">
+      <div className="bg order-1 order-md-2"> <img className="img-fluid" src={image} style={{width:"100vh"}} alt="Blog Imnage" />  </div>
       <div className="contents order-2 order-md-1">
         <div className="container">
           <div className="row align-items-center justify-content-center">
-            <div className="col-md-7">
+            <div className="col-md-7 ">
               <div className="mb-4">
                 <h1>Sign In</h1>
                 <p className="mb-4">
-                  Lorem ipsum dolor sit amet elit. Sapiente sit aut eos
-                  consectetur adipisicing.
+                  Login now and Create new posts.
+                  Explore hundreds of articles on different topics.
                 </p>
               </div>
               <form action="#" method="post">
@@ -43,10 +43,10 @@ export default function Login() {
                   value="Log In"
                   className="btn btn-block btn-primary"
                 /> */}
-                <span className="d-block text-center my-4 text-muted">
+                {/* <span className="d-block text-center my-4 text-muted">
                   — or —
-                </span>
-                <div className="social-login">
+                </span> */}
+                {/* <div className="social-login">
                   <a
                     href="#"
                     className="btn btn-secondary d-flex justify-content-center align-items-center my-1"
@@ -67,7 +67,7 @@ export default function Login() {
                   >
                     <span className="me-3"><i className="fa-brands fa-google"></i></span> Login with Google
                   </a>
-                </div>
+                </div> */}
               </form>
             </div>
           </div>
