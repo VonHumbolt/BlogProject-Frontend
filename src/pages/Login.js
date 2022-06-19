@@ -1,15 +1,16 @@
 import React from "react";
-import image from "../images/blog_8.jpg";
+import { Link } from "react-router-dom";
+import image from "../images/blog_9.jpg";
 
 export default function Login() {
   return (
 
-    <div className="d-lg-flex half mt-2 align-items-center">
-      <div className="bg order-1 order-md-2"> <img className="img-fluid" src={image} style={{width:"100vh"}} alt="Blog Imnage" />  </div>
-      <div className="contents order-2 order-md-1">
+    <div className="d-md-flex half mt-md-5 mt-lg-0 align-items-center">
+      <div className="masthead bg order-md-2 order-sm-2"> <img className="img img-fluid" src={image} style={{width:"100vh"}} alt="Blog Imnage" />  </div>
+      <div className="contents order-md-1 order-sm-1">
         <div className="container">
           <div className="row align-items-center justify-content-center">
-            <div className="col-md-7 ">
+            <div className="col-md-7 mt-3">
               <div className="mb-4">
                 <h1>Sign In</h1>
                 <p className="mb-4">
@@ -18,35 +19,35 @@ export default function Login() {
                 </p>
               </div>
               <form action="#" method="post">
-                <div className="form-group first">
-                  <label htmlFor="email">Email</label>
-                  <input type="text" className="form-control" id="email" />
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">Email</label>
+                  <input type="text" className="form-control" id="email" placeholder="Email" />
                 </div>
-                <div className="form-group last mb-3">
-                  <label htmlFor="password">Password</label>
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label">Password</label>
                   <input
                     type="password"
                     className="form-control"
                     id="password"
+                    placeholder="Password"
                   />
                 </div>
+                <Link to="/register"> 
+                  <p className='lead'> <u> Don't have an account</u>?  Sign up now </p>
+                </Link>
                 <div className="d-flex mb-5 align-items-center justify-content-end">
                   
                   <input
                   type="submit"
-                  value="Log In"
+                  value="Login"
                   className="btn btn-block btn-primary"
                 />
                 </div>
-                {/* <input
-                  type="submit"
-                  value="Log In"
-                  className="btn btn-block btn-primary"
-                /> */}
+              
                 {/* <span className="d-block text-center my-4 text-muted">
                   — or —
-                </span> */}
-                {/* <div className="social-login">
+                </span>
+                <div className="social-login">
                   <a
                     href="#"
                     className="btn btn-secondary d-flex justify-content-center align-items-center my-1"

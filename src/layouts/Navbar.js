@@ -16,29 +16,30 @@ export default function Navbar() {
     let handleLoggedIn = () => setIsLoggedIn(true);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light ">
-        <div className="container px-4 px-lg-5 text-light">
+    <nav className="navbar navbar-expand-lg navbar-light" id ="mainNav">
+        <div className="container px-4 px-lg-5">
            
-            <a className="navbar-brand" href='#'>
-                <Link style={{ display: "block" }}
+                <Link style={{ display: "block", color: 'white'}}
                         to="/"
                         key={1}>
-                    BLOG-APP
+                    <a className="navbar-brand" href='#'>
+                            BLOG-APP
+                    
+                    </a>
                 </Link>
-            
-            </a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i className="fas fa-bars"></i>
             </button>
             <div className="collapse navbar-collapse" id="navbarResponsive">
                 <ul className="navbar-nav ms-auto py-4 py-lg-0">
-                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4" href='#'>
-                    <Link style={{ display: "block" }}
+                <li className="nav-item">
+                    <a className="nav-link px-lg-3 py-3 py-lg-4" href='#'>
+                    <Link style={{ display: "block" , color:'white'}}
                                 to="/posts">
-                        ARTICLES
+                            ARTICLES
                     </Link>
-                    </a>
+                        </a>
                 </li>
                                
                     {isLoggedIn ? <LoggedIn signOut={handleLoggedOut}/> : <LoggedOut signIn={handleLoggedIn}/> }
