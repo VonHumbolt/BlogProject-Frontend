@@ -1,11 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useParams} from "react-router-dom";
 import Footer from '../layouts/Footer';
 import Navbar from '../layouts/Navbar';
+import PostService from '../services/PostService';
+import parser from "html-react-parser"
 
 export default function PostDetail() {
     let params = useParams();
     const [isLiked, setIsLiked] = useState(false)
+
+    // const [post, setPost] = useState({})
+    // useEffect(() => {
+    //     let postService = new PostService();
+    //     postService.getByPostId(8).then(result => {
+    //         console.log(result.data)
+    //         setPost(result.data)
+    //     })
+    // }, {})
 
   return (
     <div>

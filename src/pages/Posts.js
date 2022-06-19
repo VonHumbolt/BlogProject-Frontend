@@ -12,8 +12,8 @@ export default function Posts() {
         postService.getall().then(result => setPosts(result.data).catch(()=> console.log("error")))
     }, [])
   return (
-
-    <div>
+      <div>
+        {console.log(posts)}
         <Navbar />
         <header className="masthead" style={{backgroundImage:`url(${require("../images/blog_6.jpg")})`}}>
             <div className="container position-relative px-4 px-lg-5">

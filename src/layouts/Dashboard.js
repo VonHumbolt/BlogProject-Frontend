@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route,Routes } from 'react-router-dom'
 import CreatePost from '../pages/CreatePost'
+import ErrorPage from '../pages/ErrorPage'
 import Login from '../pages/Login'
 import PostDetail from '../pages/PostDetail'
 import Posts from '../pages/Posts'
@@ -24,9 +25,7 @@ export default function Dashboard() {
             <Route
                 path="*"
                 element={
-                    <main style={{ padding: "1rem" }}>
-                    <p>There's nothing here!</p>
-                    </main>
+                    <ErrorPage />
                 }
                 />
         </Routes>
