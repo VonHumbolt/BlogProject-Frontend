@@ -1,8 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import image from "../images/blog_9.jpg";
+import { Formik, Form } from "formik";
+import * as yup from "yup";
+import KaanKaplanTextInput from "../utils/customFormItems/KaanKaplanTextInput";
+import AuthService from "../services/AuthService";
 
 export default function Login() {
+
+  const authService = new AuthService();
+
+  const initValues = {
+    email:"",
+    password:""
+  }
+
+  const validationSchema = yup.object({
+
+    email: yup.string().required("Please enter an email"),
+    password: yup.string().required("Please fill this field")
+  })
+
   return (
 
     <div className="d-md-flex half mt-md-5 mt-lg-0 align-items-center">
@@ -18,31 +36,40 @@ export default function Login() {
                   Explore hundreds of articles on different topics.
                 </p>
               </div>
-              <form action="#" method="post">
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email</label>
-                  <input type="text" className="form-control" id="email" placeholder="Email" />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder="Password"
-                  />
-                </div>
-                <Link to="/register"> 
-                  <p className='lead'> <u> Don't have an account</u>?  Sign up now </p>
-                </Link>
-                <div className="d-flex mb-5 align-items-center justify-content-end">
+              <Formik 
+                initialValues={initValues}
+                validationSchema={validationSchema}
+                onSubmit={(values) => {
+                  authService.login(values).then(result => {
+                    // Email ile redux a kullanıcı ekle
+                    // navigation ile posts page e yönlendir.
+                  }).catch(error => console.log(error))
                   
-                  <input
-                  type="submit"
-                  value="Login"
-                  className="btn btn-block btn-primary"
-                />
-                </div>
+                 
+                }}>
+
+                <Form>
+                    <div className="mb-3">
+                      <KaanKaplanTextInput name="email" type="text" className="form-control" id="email" placeholder="Email" />
+                    </div>
+                    <div className="mb-3">
+                      <KaanKaplanTextInput name="password" type="password" className="form-control" id="password" placeholder="Password" />
+                    </div>
+
+                    <Link to="/register"> 
+                      <p className='lead'> <u> Don't have an account</u>?  Sign up now </p>
+                    </Link>
+                    <div className="d-flex mb-5 align-items-center justify-content-end">
+                      
+                      <input
+                      type="submit"
+                      value="Login"
+                      className="btn btn-block btn-primary"
+                    />
+                    </div>
+                </Form>
+
+              </Formik>
               
                 {/* <span className="d-block text-center my-4 text-muted">
                   — or —
@@ -69,7 +96,6 @@ export default function Login() {
                     <span className="me-3"><i className="fa-brands fa-google"></i></span> Login with Google
                   </a>
                 </div> */}
-              </form>
             </div>
           </div>
         </div>

@@ -37,6 +37,7 @@ export default class PostService{
     }
 
     add(userId, post) {
+   
         return axios.post(this.url + "add/" + userId, post);
     }
 

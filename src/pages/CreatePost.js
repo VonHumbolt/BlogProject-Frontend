@@ -4,8 +4,9 @@ import { CKEditor } from '@ckeditor/ckeditor5-react'
 import Navbar from '../layouts/Navbar';
 import Footer from '../layouts/Footer';
 import PostService from '../services/PostService';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import * as yup from "yup";
+import KaanKaplanTextInput from '../utils/customFormItems/KaanKaplanTextInput';
 
 export default function CreatePost() {
   const [postText, setPostText] = useState("")
@@ -21,16 +22,7 @@ export default function CreatePost() {
     description: yup.string().required("Your post must have a simple description"),
   })
   
-  // const postService = new PostService();
-
-  // let createPost = () => {
-  //   let post = {
-  //     "title":"React Post",
-  //     "description": "React Description",
-  //     "content": postText
-  //   }
-  //   postService.add(7, post).then(result => console.log(result))
-  // }
+  const postService = new PostService();
 
   return (
     <div>
@@ -57,27 +49,16 @@ export default function CreatePost() {
                   onSubmit={(values) => {
                     values.postText = postText;
                     console.log(values)
+                    postService.add(7, values).then(result => console.log(result))
                   }}
                   >
 
                   <Form>
                     <div className="mb-3">
-                      <label htmlFor="postTitle" className="form-label"> <strong>Post Title </strong> </label>
-                      <Field name="title" id="postTitle" type="text" placeholder="Post Title" className="form-control"></Field>
-                      <ErrorMessage name="title" render={ error =>
-                       <div className="form-text" style={{color:"red"}}>
-                          <i className="fa-solid fa-triangle-exclamation"></i> {error}
-                       </div>
-                      }></ErrorMessage>
+                      <KaanKaplanTextInput name="title" id="postTitle" type="text" placeholder="Post Title" className="form-control"/>
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="postDescription" className="form-label">  <strong> Post Description </strong></label>
-                      <Field name="description" type="text" id="postDescription" placeholder="Post Description" className="form-control"></Field>
-                      <ErrorMessage name="description" render={ error =>
-                       <div className="form-text" style={{color:"red"}}>
-                          <i className="fa-solid fa-triangle-exclamation"></i> {error}
-                       </div>
-                      }></ErrorMessage>
+                      <KaanKaplanTextInput name="description" type="text" id="postDescription" placeholder="Post Description" className="form-control" />
                     </div>
 
                     <label htmlFor="editor" className="form-label"><strong> Post Content </strong> </label>
