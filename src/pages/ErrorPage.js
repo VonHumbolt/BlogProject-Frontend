@@ -6,6 +6,7 @@ export default function ErrorPage() {
     <div className='d-flex justify-content-center align-items-center text-center' style={{height:"75vh"}}>
         
             <main>
+                <i className="fa-solid fa-screwdriver-wrench fa-5x"></i>
                 <h1>Ups...There is nothing in here!</h1>
                 <h3>404 Page Error</h3>
                 <div className='row mt-4'>
