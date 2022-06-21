@@ -9,17 +9,19 @@ import {removeUserToRedux} from "../store/actions/userActions";
 export default function Navbar() {
 
     const navigate = useNavigate()
+    const user = JSON.parse( localStorage.getItem("user") );
 
     const userRedux = useSelector(state => state.user)
     const dispatch = useDispatch()
-    const [isLoggedIn, setIsLoggedIn] = useState(Object.keys(userRedux).length > 0)
+    const [isLoggedIn, setIsLoggedIn] = useState(user)
 
     let handleLoggedOut = () => {
         setIsLoggedIn(false);
         dispatch(removeUserToRedux(userRedux))
+        localStorage.clear();
         navigate("/login");
     }
-    
+
     let handleLoggedIn = () => setIsLoggedIn(true);
 
   return (

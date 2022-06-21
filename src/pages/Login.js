@@ -46,11 +46,9 @@ export default function Login() {
             token: response.headers['authorization']
           }
           handleStoreUserInRedux(user)
+          localStorage.setItem("user", JSON.stringify(user));
           navigate("/posts")
-           // navigation ile posts page e yönlendir.
-          // if(response.headers['authorization']){
-          //     history.push("/menu");
-          // }
+          
         }).catch(error => console.log(error))
 
       } else {

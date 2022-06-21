@@ -49,7 +49,11 @@ export default class PostService{
         return axios.post(this.url + "delete/" + postId);
     }
 
-    edit(postId, userId, editedPost) {
-        return axios.post(this.url + "edit/" + postId + "/" + userId, editedPost);
+    edit(postId, userId, editedPost, token) {
+        return axios.post(this.url + "edit/" + postId + "/" + userId, editedPost, {
+            headers: {
+                "Authorization": token
+            }
+        });
     }
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Route,Routes } from 'react-router-dom'
 import CreatePost from '../pages/CreatePost'
+import EditPost from '../pages/EditPost'
 import ErrorPage from '../pages/ErrorPage'
 import Login from '../pages/Login'
 import PostDetail from '../pages/PostDetail'
@@ -12,7 +13,8 @@ import Register from '../pages/Register'
 
 export default function Dashboard() {
 
-  const user = useSelector(state => state.user)
+  // const user = useSelector(state => state.user)
+  const user = JSON.parse( localStorage.getItem("user") );
 
   return (
     <div>
@@ -28,11 +30,17 @@ export default function Dashboard() {
             <Route path="profile/:userId" element={<Profile />} />
            
             <Route path="createPost" element={
-               <ProtectedRoute user={user}>
+              <ProtectedRoute user={user}>
                   <CreatePost />
                </ProtectedRoute>
             } />
         
+            <Route path="edit/:postId" element={
+              <ProtectedRoute user={user}>
+                <EditPost />
+              </ProtectedRoute>
+            } />
+
             <Route
                 path="*"
                 element={

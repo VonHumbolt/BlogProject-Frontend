@@ -1,7 +1,7 @@
 import {Navigate} from "react-router-dom"
 
 const ProtectedRoute = ({children, user}) => {
-    if (Object.keys(user).length === 0) {
+    if (!user) {
         return <Navigate to="/login" />
     }
     return children
