@@ -36,9 +36,13 @@ export default class PostService{
         return axios.get(this.url + "getByContent/" + content);
     }
 
-    add(userId, post) {
+    add(userId, post, token) {
    
-        return axios.post(this.url + "add/" + userId, post);
+        return axios.post(this.url + "add/" + userId, post, {
+            headers:{
+                "Authorization": token
+            }
+        });
     }
 
     delete(postId) {

@@ -2,17 +2,24 @@ import React, { useState } from 'react'
 import { useNavigate,Link } from "react-router-dom";
 import LoggedIn from './LoggedIn'
 import LoggedOut from './LoggedOut'
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useDispatch } from "react-redux/es/hooks/useDispatch";
+import {removeUserToRedux} from "../store/actions/userActions";
 
 export default function Navbar() {
 
     const navigate = useNavigate()
 
-    const [isLoggedIn, setIsLoggedIn] = useState(true)
+    const userRedux = useSelector(state => state.user)
+    const dispatch = useDispatch()
+    const [isLoggedIn, setIsLoggedIn] = useState(Object.keys(userRedux).length > 0)
 
     let handleLoggedOut = () => {
         setIsLoggedIn(false);
-        navigate("/");
+        dispatch(removeUserToRedux(userRedux))
+        navigate("/login");
     }
+    
     let handleLoggedIn = () => setIsLoggedIn(true);
 
   return (

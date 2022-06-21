@@ -7,14 +7,17 @@ import PostService from '../services/PostService';
 import { Formik, Form } from 'formik';
 import * as yup from "yup";
 import KaanKaplanTextInput from '../utils/customFormItems/KaanKaplanTextInput';
+import { useSelector } from 'react-redux/es/exports';
 
 export default function CreatePost() {
+
+  const user = useSelector(state => state.user)
+
   const [postText, setPostText] = useState("")
   
   const initValues = {
     title: "",
     description: "",
-    postText: "",
   }
 
   const validationSchema = yup.object({
@@ -47,9 +50,14 @@ export default function CreatePost() {
                   initialValues={initValues}
                   validationSchema={validationSchema}
                   onSubmit={(values) => {
-                    values.postText = postText;
-                    console.log(values)
-                    postService.add(7, values).then(result => console.log(result))
+                    values.content = postText;
+                    postService.add(user.userId, values, user.token).then(result => {
+                      
+                      if(result.status === 201) {
+                        // Post Detail e git!
+                      }
+
+                    }).catch(error => console.log(error))
                   }}
                   >
 

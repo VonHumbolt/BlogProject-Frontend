@@ -5,10 +5,18 @@ import { Formik, Form } from "formik";
 import * as yup from "yup";
 import KaanKaplanTextInput from "../utils/customFormItems/KaanKaplanTextInput";
 import AuthService from "../services/AuthService";
+import { useDispatch } from "react-redux/es/hooks/useDispatch";
+import { addUserToRedux } from "../store/actions/userActions";
+import UserService from "../services/UserService";
+import {useNavigate} from "react-router-dom";
 
 export default function Login() {
 
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const authService = new AuthService();
+  const userService = new UserService();
 
   const initValues = {
     email:"",
@@ -20,6 +28,37 @@ export default function Login() {
     email: yup.string().required("Please enter an email"),
     password: yup.string().required("Please fill this field")
   })
+
+  const handleStoreUserInRedux = (user) =>{
+    dispatch(addUserToRedux(user))
+  }
+
+  async function handleLogin(values) {
+
+      const response = await authService.login(values)
+      if (response.status === 200) {
+        await userService.getUserByEmail(values.email).then(result => {
+          const user = {
+            userId: result.data.userId,
+            firstName: result.data.firstName,
+            lastName: result.data.lastName,
+            email: values.email,
+            token: response.headers['authorization']
+          }
+          handleStoreUserInRedux(user)
+          navigate("/posts")
+           // navigation ile posts page e yönlendir.
+          // if(response.headers['authorization']){
+          //     history.push("/menu");
+          // }
+        }).catch(error => console.log(error))
+
+      } else {
+        
+        
+      }  
+     
+}
 
   return (
 
@@ -40,12 +79,8 @@ export default function Login() {
                 initialValues={initValues}
                 validationSchema={validationSchema}
                 onSubmit={(values) => {
-                  authService.login(values).then(result => {
-                    // Email ile redux a kullanıcı ekle
-                    // navigation ile posts page e yönlendir.
-                  }).catch(error => console.log(error))
-                  
-                 
+               
+                  handleLogin(values);
                 }}>
 
                 <Form>

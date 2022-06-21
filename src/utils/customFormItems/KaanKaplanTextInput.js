@@ -4,7 +4,6 @@ import { Field } from 'formik'
 
 export default function KaanKaplanTextInput({...props}) {
     const [field, meta] = useField(props)
-    console.log(field)
   return (
     <div>
         <label htmlFor={props.id} className="form-label"> <strong>{props.placeholder} </strong> </label>
