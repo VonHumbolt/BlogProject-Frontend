@@ -3,17 +3,37 @@ import {Outlet, Link} from "react-router-dom"
 import Footer from '../layouts/Footer'
 import Navbar from '../layouts/Navbar'
 import PostService from '../services/PostService'
+import convertDate from '../utils/convertDate'
 
 export default function Posts() {
 
+    const postService = new PostService();
+    const [numberOfPosts, setNumberOfPosts] = useState(0)
+    const [pageNo, setPageNo] = useState(1)
+    async function getSortedPost(pageNo) {
+        await postService.getSortedDate(pageNo).then(result => setPosts(result.data))
+    }
+
     const [posts, setPosts] = useState([])
     useEffect(() => {
-        let postService = new PostService();
-        postService.getall().then(result => setPosts(result.data).catch(()=> console.log("error")))
+        postService.getNumberOfPosts().then(result => setNumberOfPosts(result.data))
+        getSortedPost(pageNo)
     }, [])
+
+    function getOlderPosts(){
+        let number = pageNo + 1;
+        setPageNo(number)
+        getSortedPost(number);
+    }
+
+    function getPreviousPosts(){
+        let number = pageNo - 1;
+        setPageNo(number)
+        getSortedPost(number);
+    }
+
   return (
       <div>
-        {console.log(posts)}
         <Navbar />
         <header className="masthead" style={{backgroundImage:`url(${require("../images/blog_6.jpg")})`}}>
             <div className="container position-relative px-4 px-lg-5">
@@ -30,7 +50,32 @@ export default function Posts() {
         <div className="container px-4 px-lg-5">
             <div className="row gx-4 gx-lg-5 justify-content-center">
                 <div className="col-md-10 col-lg-8 col-xl-7">
-                    <div className="post-preview">
+                    {posts.map(post => (
+                        <div className="post-preview" key={post.postId}>
+                        <a href="#">
+                        <Link
+                            style={{ display: "block", margin: "1rem 0",  }}
+                            to={`/posts/${post.postId}`}>
+                            <h2 className="post-title">{post?.title}</h2>
+                        </Link>
+                            <h3 className="post-subtitle">{post?.description}</h3>
+                        </a>
+                            <p className="post-meta">
+                                Posted by
+                                    <a href="#!">
+                                        <Link
+                                            to={`/profile/${post?.author?.userId}`}>
+                                        
+                                        {" " + post?.author?.firstName + " " + post?.author?.lastName + " "}
+                                        
+                                        </Link>
+                                    </a>
+                                on {convertDate(post?.publishedDate)}
+                            </p>
+                            <hr className="my-4" />
+                        </div>
+                    ))}
+                    {/* <div className="post-preview">
                         <a href="post.html">
                         <Link
                             style={{ display: "block", margin: "1rem 0",  }}
@@ -78,8 +123,21 @@ export default function Posts() {
                             on July 8, 2022
                         </p>
                     </div>
-                    <hr className="my-4" />
-                    <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                    <hr className="my-4" /> */}
+                    <div className='row'>
+                        {pageNo > 1 ?
+                            <div className='col'>
+                                <div className="d-flex justify-content-start mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getPreviousPosts()}>Previous Posts →</a></div>
+
+                            </div>
+                        : null}
+                        {numberOfPosts === 0 ? <div> <h3>There is no posts...</h3></div> : null}
+                        {(Math.ceil(numberOfPosts / 5) !== pageNo && numberOfPosts !== 0) ?
+                            <div className='col'>
+                                <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getOlderPosts()}>Older Posts →</a></div>
+                            </div>
+                        :null}
+                    </div>
                 </div>
             </div>
         </div>

@@ -8,16 +8,16 @@ export default class PostService{
         return axios.get(this.url + "getall");
     }
     
-    getSortedDate() {
-        return axios.get(this.url + "sortedDate")
+    getSortedDate(pageNo=1) {
+        return axios.get(this.url + "sortedDate/?pageNo=" + pageNo + "&" + "pageSize=" + 5)
     }
 
     getMostLiked() {
         return axios.get(this.url + "sortedLikeCount")
     }
 
-    getByAuthorId(authorId) {
-        return axios.get(this.url + "getByAuthorId/" + authorId);
+    getByAuthorId(authorId, pageNo=1) {
+        return axios.get(this.url + "getByAuthorId/" + authorId + "/?pageNo=" + pageNo + "&" + "pageSize=" + 5);
     }
 
     getByPostId(postId) {
@@ -45,8 +45,12 @@ export default class PostService{
         });
     }
 
-    delete(postId) {
-        return axios.post(this.url + "delete/" + postId);
+    delete(postId, token) {
+        return axios.post(this.url + "delete/" + postId, null, {
+            headers: {
+                "Authorization": token
+            }
+        });
     }
 
     edit(postId, userId, editedPost, token) {
@@ -55,5 +59,13 @@ export default class PostService{
                 "Authorization": token
             }
         });
+    }
+
+    getNumberOfPosts(){
+        return axios.get(this.url + "getNumberOfPosts");
+    }
+
+    getAuthorPostCount(authorId){
+        return axios.get(this.url + "getAuthorPostCount/" + authorId);
     }
 }
