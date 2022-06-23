@@ -22,7 +22,10 @@ export default function Navbar() {
         navigate("/login");
     }
 
-    let handleLoggedIn = () => setIsLoggedIn(true);
+    let handleLoggedIn = () => {
+        navigate("/login")
+        setIsLoggedIn(true);
+    }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light" id ="mainNav">
@@ -43,11 +46,9 @@ export default function Navbar() {
             <div className="collapse navbar-collapse" id="navbarResponsive">
                 <ul className="navbar-nav ms-auto py-4 py-lg-0">
                 <li className="nav-item">
-                    <a className="nav-link px-lg-3 py-3 py-lg-4" href='#'>
-                    <Link style={{ display: "block" , color:'white'}}
-                                to="/posts">
+                    
+                    <a className="nav-link px-lg-3 py-3 py-lg-4" href='#' onClick={() => navigate("/posts")}>
                             ARTICLES
-                    </Link>
                         </a>
                 </li>
                                

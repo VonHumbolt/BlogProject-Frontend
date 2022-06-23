@@ -4023,7 +4023,7 @@ textarea.form-control-lg {
   padding-bottom: 0.5rem;
 }
 
-.navbar-collapse {
+.navbar-collapse { 
   flex-basis: 100%;
   flex-grow: 1;
   align-items: center;
@@ -4117,6 +4117,7 @@ textarea.form-control-lg {
     flex-grow: 0;
     padding: 0;
     overflow-y: visible;
+    
   }
 }
 @media (min-width: 768px) {

@@ -57,7 +57,11 @@ export default function Profile() {
         postService.getAuthorPostCount(userId).then(result => setNumberOfPosts(result.data))
 
         authorService.getById(userId).then(result => setAuthor(result.data))
-        likedPostService.getNumberOfUsersLikedPosts(userId, user.token).then(result => setNumberOfUserLikedPosts(result.data))
+
+        if(user) {
+            likedPostService.getNumberOfUsersLikedPosts(userId, user.token).then(result => setNumberOfUserLikedPosts(result.data))
+
+        }
 
     }, [])
 
@@ -191,7 +195,7 @@ export default function Profile() {
 
                 {/* Profile Settings */}
                 <div className='col-md-4 col-lg-4 col-xl-4 mt-md-5 mt-lg-0'>
-                  <div className="card mt-3">
+                  <div className="card mt-3" style={{borderRadius:"10px"}}>
                     <h3 className="card-header text-center">Profile Informations
                     </h3>
                     <div className="card-body">

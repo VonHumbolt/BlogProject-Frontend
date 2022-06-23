@@ -65,7 +65,7 @@ export default function Register() {
                   <Link to="/login">
                     <p className='lead'> <u> Already have an account</u>?  Login now  </p>
                   </Link>
-                  <div className="d-flex mb-5 align-items-center justify-content-end">
+                  <div className="d-grid gap-2 col-6 mx-auto">
                     
                     <input
                       type="submit"

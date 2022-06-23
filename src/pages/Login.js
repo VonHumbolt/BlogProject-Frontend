@@ -65,7 +65,7 @@ export default function Login() {
       <div className="contents order-md-1 order-sm-1">
         <div className="container">
           <div className="row align-items-center justify-content-center">
-            <div className="col-md-7 mt-3">
+            <div className="col-md-7 mt-3" >
               <div className="mb-4">
                 <h1>Sign In</h1>
                 <p className="mb-4">
@@ -92,13 +92,13 @@ export default function Login() {
                     <Link to="/register"> 
                       <p className='lead'> <u> Don't have an account</u>?  Sign up now </p>
                     </Link>
-                    <div className="d-flex mb-5 align-items-center justify-content-end">
+                    <div className="d-grid gap-2 col-6 mx-auto">
                       
                       <input
-                      type="submit"
-                      value="Login"
-                      className="btn btn-block btn-primary"
-                    />
+                        type="submit"
+                        value="Login"
+                        className="btn btn-block btn-primary"
+                      />
                     </div>
                 </Form>
 
