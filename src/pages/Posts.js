@@ -68,7 +68,7 @@ export default function Posts() {
                 <div className="row gx-4 gx-lg-5 justify-content-center">
                     <div className="col-md-10 col-lg-8 col-xl-7">
                         <div className="site-heading">
-                            <h1>Clean Blog</h1>
+                            <h1>Blog Posts</h1>
                             <span className="subheading">A Blog Theme by Start Bootstrap</span>
                         </div>
                        
@@ -171,14 +171,18 @@ export default function Posts() {
                     <div className='row'>
                         {pageNo > 1 ?
                             <div className='col'>
-                                <div className="d-flex justify-content-start mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getPreviousPosts()}>Previous Posts →</a></div>
+                                <div className="d-flex justify-content-start mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getPreviousPosts()}>
+                                    <i class="fa-solid fa-left-long"></i> Previous
+                                </a></div>
 
                             </div>
                         : null}
                         {numberOfPosts === 0 ? <div> <h3>There is no posts...</h3></div> : null}
                         {(Math.ceil(numberOfPosts / 5) !== pageNo && numberOfPosts !== 0) ?
                             <div className='col'>
-                                <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getOlderPosts()}>Older Posts →</a></div>
+                                <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getOlderPosts()}>
+                                    Older Posts <i class="fa-solid fa-right-long"></i>
+                                </a></div>
                             </div>
                         :null}
                     </div>

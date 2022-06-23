@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { addUserToRedux } from "../store/actions/userActions";
 import UserService from "../services/UserService";
 import {useNavigate} from "react-router-dom";
+import ProfileNavbar from "../utils/ProfileNavbar";
 
 export default function Login() {
 
@@ -59,10 +60,11 @@ export default function Login() {
 }
 
   return (
-
+    <div>
     <div className="d-md-flex half mt-md-5 mt-lg-0 align-items-center">
-      <div className="masthead bg order-md-2 order-sm-2"> <img className="img img-fluid" src={image} style={{width:"100vh"}} alt="Blog Imnage" />  </div>
+      <div className="masthead bg order-md-2 order-sm-2"> <img className="img img-fluid" src={image} onClick={() => navigate("/")} style={{width:"100vh"}} alt="Blog Imnage" />  </div>
       <div className="contents order-md-1 order-sm-1">
+      
         <div className="container">
           <div className="row align-items-center justify-content-center">
             <div className="col-md-7 mt-3" >
@@ -134,5 +136,6 @@ export default function Login() {
         </div>
       </div>
     </div>
+  </div>
   );
 }

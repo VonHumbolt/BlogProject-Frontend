@@ -4,6 +4,7 @@ import { Route,Routes } from 'react-router-dom'
 import CreatePost from '../pages/CreatePost'
 import EditPost from '../pages/EditPost'
 import ErrorPage from '../pages/ErrorPage'
+import HomePage from '../pages/HomePage'
 import Login from '../pages/Login'
 import PostDetail from '../pages/PostDetail'
 import Posts from '../pages/Posts'
@@ -20,7 +21,7 @@ export default function Dashboard() {
     <div>
         <Routes>
            
-            <Route exact path="/" element={<Posts />}/>
+            <Route exact path="/" element={<HomePage />}/>
             <Route path="posts" element={<Posts />}>
                
             </Route>

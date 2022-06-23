@@ -12,6 +12,7 @@ import * as yup from "yup";
 import UserService from '../services/UserService'
 import LikedPostService from '../services/LikedPostService'
 import LikedPostLister from '../utils/LikedPostLister'
+import ProfileNavbar from '../utils/ProfileNavbar'
 
 
 export default function Profile() {
@@ -110,8 +111,9 @@ export default function Profile() {
 
   return (
     <div>
-      <Navbar />
-      <div className="container px-4 px-lg-5 mt-5">
+      <ProfileNavbar />
+
+      <div className="container px-4 px-lg-5 mt-sm-1 mt-md-4">
           
             <div className="row gx-4 gx-lg-5 justify-content-center">
                 <div className="col-md-8 col-lg-8 col-xl-8">
@@ -180,13 +182,19 @@ export default function Profile() {
                     <div className='row'>
                         {pageNo > 1 ?
                             <div className='col'>
-                                <div className="d-flex justify-content-start mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getPreviousPosts()}>Previous Posts →</a></div>
+                                <div className="d-flex justify-content-start mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getPreviousPosts()}>
+                                        <i class="fa-solid fa-left-long"></i>Previous Posts
+                                    </a>
+                                </div>
 
                             </div>
                         : null}
                         {(Math.ceil(numberOfPosts / 5) !== pageNo && numberOfPosts !== 0) ?
                             <div className='col'>
-                                <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getOlderPosts()}>Older Posts →</a></div>
+                                <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getOlderPosts()}>
+                                        Older Posts <i class="fa-solid fa-right-long"></i>
+                                    </a>
+                                </div>
                             </div>
                         :null} 
                     </div>

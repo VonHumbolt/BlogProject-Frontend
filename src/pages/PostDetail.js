@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {useParams, Link} from "react-router-dom";
+import {useParams, Link, useNavigate} from "react-router-dom";
 import Footer from '../layouts/Footer';
 import Navbar from '../layouts/Navbar';
 import LikedPostService from '../services/LikedPostService';
@@ -12,6 +12,7 @@ export default function PostDetail() {
     let user = JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")) : null
     
     const userService = new UserService();
+    const navigate = new useNavigate();
 
     const [isLiked, setIsLiked] = useState(false)
 
@@ -49,8 +50,7 @@ export default function PostDetail() {
                 })
             }
         } else {
-            //////
-            console.log("Giriş yapın");
+            navigate("/login");
         }
     }
 

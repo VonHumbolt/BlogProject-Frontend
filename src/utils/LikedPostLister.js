@@ -62,13 +62,19 @@ export default function LikedPostLister(props) {
                     <div className='row'>
                         {pageNo > 1 ?
                             <div className='col'>
-                                <div className="d-flex justify-content-start mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getPreviousPosts()}>Previous Posts</a></div>
+                                <div className="d-flex justify-content-start mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getPreviousPosts()}>
+                                        <i class="fa-solid fa-left-long"></i>Previous Posts
+                                    </a>
+                                </div>
 
                             </div>
                         : null}
                         {(Math.ceil(props.numberOfLikedPosts / 5) !== pageNo && props.numberOfLikedPosts !== 0) ?
                             <div className='col'>
-                                <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getOlderPosts()}>Older Posts →</a></div>
+                                <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getOlderPosts()}>
+                                        Older Posts <i class="fa-solid fa-right-long"></i>
+                                    </a>
+                                </div>
                             </div>
                         :null} 
                     </div>

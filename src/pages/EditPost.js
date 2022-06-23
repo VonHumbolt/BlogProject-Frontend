@@ -42,7 +42,7 @@ export default function EditPost() {
         
         <Navbar />
         <header className="masthead">
-            <div className="container position-relative px-4 px-lg-5">
+            <div className="container position-relative px-4 px-lg-5" style={{backgroundImage:`url(${require("../images/blog_6.jpg")})`}}>
                 <div className="row gx-4 gx-lg-5 justify-content-center">
                     <div className="col-md-10 col-lg-8 col-xl-7">
                         <div className="site-heading">
