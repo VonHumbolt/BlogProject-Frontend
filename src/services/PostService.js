@@ -12,8 +12,8 @@ export default class PostService{
         return axios.get(this.url + "sortedDate/?pageNo=" + pageNo + "&" + "pageSize=" + 5)
     }
 
-    getMostLiked() {
-        return axios.get(this.url + "sortedLikeCount")
+    getMostLiked(pageNo=1) {
+        return axios.get(this.url + "sortedLikeCount/?pageNo=" + pageNo + "&" + "pageSize=5")
     }
 
     getByAuthorId(authorId, pageNo=1) {

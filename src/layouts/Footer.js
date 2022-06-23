@@ -27,15 +27,15 @@ export default function Footer() {
                                 </a>
                             </li>
                             <li className="list-inline-item">
-                                <a href="#!">
+                                <a href="https://www.linkedin.com/in/kaan-kaplan/">
                                     <span className="fa-stack fa-lg">
                                         <i className="fas fa-circle fa-stack-2x"></i>
-                                        <i className="fab fa-github fa-stack-1x fa-inverse"></i>
+                                        <i className="fab fa-linkedin fa-stack-1x fa-inverse"></i>
                                     </span>
                                 </a>
                             </li>
                         </ul>
-                        <div className="small text-center text-muted fst-italic">Copyright &copy; Your Website 2022</div>
+                        <div className="small text-center text-muted fst-italic">Copyright &copy; Blog Project 2022</div>
                     </div>
                 </div>
             </div>

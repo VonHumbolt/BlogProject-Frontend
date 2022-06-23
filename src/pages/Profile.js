@@ -163,7 +163,7 @@ export default function Profile() {
                                             <i className="fa-solid fa-trash fa-2x" data-bs-toggle="modal" data-bs-target="#deleteModal" onClick={() => setPostIdForDelete(post.postId)} style={{color:"#dc3545"}}></i>
                                         </div>
                                     : null }
-                                    <hr className="my-4" />
+                                    <hr className="my-3" />
                                 </div>
                             ))}
                     </div>
