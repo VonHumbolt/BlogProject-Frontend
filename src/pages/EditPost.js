@@ -2,21 +2,22 @@ import React, { useEffect, useState } from 'react'
 import  ClassicEditor  from '@ckeditor/ckeditor5-build-classic'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import Navbar from '../layouts/Navbar';
-import Footer from '../layouts/Footer';
 import PostService from '../services/PostService';
-import { Formik, Form, useFormik } from 'formik';
+import { Formik, Form } from 'formik';
 import * as yup from "yup";
 import KaanKaplanTextInput from '../utils/customFormItems/KaanKaplanTextInput';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 export default function EditPost() {
 
     let {postId} = useParams()
-   
+    
     const user = JSON.parse(localStorage.getItem("user"))
     const [post, setPost] = useState({})
-    const postService = new PostService();
 
+    const navigate = useNavigate();
+    const postService = new PostService();
+    
     useEffect(() => {
         postService.getByPostId(postId).then(result => {
             setPost(result.data)
@@ -41,8 +42,8 @@ export default function EditPost() {
     <div>
         
         <Navbar />
-        <header className="masthead">
-            <div className="container position-relative px-4 px-lg-5" style={{backgroundImage:`url(${require("../images/blog_6.jpg")})`}}>
+        <header className="masthead" style={{backgroundImage:`url(${require("../images/office_table.jpg")})`}}>
+            <div className="container position-relative px-4 px-lg-5">
                 <div className="row gx-4 gx-lg-5 justify-content-center">
                     <div className="col-md-10 col-lg-8 col-xl-7">
                         <div className="site-heading">
@@ -65,7 +66,7 @@ export default function EditPost() {
                     values.content = postText;
                     postService.edit(postId, user.userId, values, user.token).then(result => {
                       if(result.status === 200) {
-                        // Post Detail e git!
+                        navigate("/posts/" + postId)
                       }
 
                     }).catch(error => console.log(error))

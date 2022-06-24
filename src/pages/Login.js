@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams, Outlet } from "react-router-dom";
 import image from "../images/blog_9.jpg";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
@@ -8,10 +8,10 @@ import AuthService from "../services/AuthService";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { addUserToRedux } from "../store/actions/userActions";
 import UserService from "../services/UserService";
-import {useNavigate} from "react-router-dom";
-import ProfileNavbar from "../utils/ProfileNavbar";
 
 export default function Login() {
+
+  let isFirstLogin = useParams();
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -26,8 +26,8 @@ export default function Login() {
 
   const validationSchema = yup.object({
 
-    email: yup.string().required("Please enter an email"),
-    password: yup.string().required("Please fill this field")
+    email: yup.string().required("Please enter your email"),
+    password: yup.string().required("Please enter your password")
   })
 
   const handleStoreUserInRedux = (user) =>{
@@ -48,27 +48,31 @@ export default function Login() {
           }
           handleStoreUserInRedux(user)
           localStorage.setItem("user", JSON.stringify(user));
-          navigate("/posts")
           
         }).catch(error => console.log(error))
-
+        
+        navigate("/posts")
       } else {
         
-        
       }  
-     
+      
 }
 
   return (
     <div>
     <div className="d-md-flex half mt-md-5 mt-lg-0 align-items-center">
-      <div className="masthead bg order-md-2 order-sm-2"> <img className="img img-fluid" src={image} onClick={() => navigate("/")} style={{width:"100vh"}} alt="Blog Imnage" />  </div>
+      <div className="masthead bg order-md-2 order-sm-2"> <img className="img img-fluid d-none d-sm-block" src={image} onClick={() => navigate("/")} style={{width:"100vh"}} alt="Blog Imnage" />  </div>
       <div className="contents order-md-1 order-sm-1">
       
         <div className="container">
           <div className="row align-items-center justify-content-center">
             <div className="col-md-7 mt-3" >
               <div className="mb-4">
+                  {isFirstLogin.first === "first" ? 
+                      <div className="alert alert-success text-center" role="alert" style={{borderRadius:"15px"}}>
+                          Activation code was send your email. Please activate your account for login.
+                      </div>
+                  : null}
                 <h1>Sign In</h1>
                 <p className="mb-4">
                   Login now and Create new posts.
@@ -105,32 +109,7 @@ export default function Login() {
                 </Form>
 
               </Formik>
-              
-                {/* <span className="d-block text-center my-4 text-muted">
-                  — or —
-                </span>
-                <div className="social-login">
-                  <a
-                    href="#"
-                    className="btn btn-secondary d-flex justify-content-center align-items-center my-1"
-                  >
-                    <span className="me-3"><i className="fa-brands fa-facebook"></i></span> Login with
-                    Facebook
-                  </a>
-                  <a
-                    href="#"
-                    className="btn btn-primary d-flex justify-content-center align-items-center my-1"
-                  >
-                    <span className="me-3"><i className="fa-brands fa-twitter"></i></span> Login with
-                    Twitter
-                  </a>
-                  <a
-                    href="#"
-                    className="btn btn-danger d-flex justify-content-center align-items-center my-1"
-                  >
-                    <span className="me-3"><i className="fa-brands fa-google"></i></span> Login with Google
-                  </a>
-                </div> */}
+                
             </div>
           </div>
         </div>

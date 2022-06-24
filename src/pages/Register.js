@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link,useNavigate } from 'react-router-dom';
+import { Link,useNavigate, Outlet } from 'react-router-dom';
 import image from "../images/blog_9.jpg";
 import { Formik, Form } from 'formik';
 import * as yup from "yup";
@@ -27,7 +27,7 @@ export default function Register() {
 
   return (
     <div className="d-md-flex half  mt-md-5 mt-lg-0 align-items-center">
-    <div className="masthead bg order-md-1 order-sm-1"> <img className="img img-fluid" src={image} onClick={() => navigate("/")} style={{width:"100vh"}} alt="Blog Imnage" />  </div>
+    <div className="masthead bg order-md-1 order-sm-1"> <img className="img img-fluid d-none d-sm-block" src={image} onClick={() => navigate("/")} style={{width:"100vh"}} alt="Blog Imnage" />  </div>
     <div className="contents order-md-2 order-sm-2">
       <div className="container">
         <div className="row justify-content-center">
@@ -43,11 +43,10 @@ export default function Register() {
               validationSchema={validationSchema}
               onSubmit={(values) => {
                 authService.register(values).then(result => {
-                    console.log("Activation code was send your email! Please activate your account")
+                    navigate("/login/first")
                   }).catch(error => {
                     
                   })
-                console.log(values);
               }}
             >
               <Form>
@@ -83,6 +82,7 @@ export default function Register() {
         </div>
       </div>
     </div>
+    <Outlet />
   </div>
   )
 }

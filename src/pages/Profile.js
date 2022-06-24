@@ -163,9 +163,9 @@ export default function Profile() {
                                     </div>
                                     {isUserProfile ? 
                                         <div className='col-sm-2 d-flex align-items-center justify-content-between'>
-                                            <Link to="/edit/9">
+                                            <Link to={`/edit/${post.postId}`}>
                                                 <i className="fa-solid fa-pen-to-square fa-2x" style={{color:"#0085A1"}}></i>
-                                            </Link> 
+                                            </Link>
                                             <i className="fa-solid fa-trash fa-2x" data-bs-toggle="modal" data-bs-target="#deleteModal" onClick={() => setPostIdForDelete(post.postId)} style={{color:"#dc3545"}}></i>
                                         </div>
                                     : null }

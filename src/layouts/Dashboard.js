@@ -27,6 +27,7 @@ export default function Dashboard() {
             </Route>
             <Route path="posts/:postId" element={<PostDetail />} />
             <Route path="login" element={<Login />} />
+            <Route path="login/:first" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="profile/:userId" element={<Profile />} />
            
