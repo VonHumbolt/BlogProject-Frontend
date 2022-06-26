@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Link, Outlet} from 'react-router-dom'
-import Navbar from '../layouts/Navbar'
 import {useParams} from "react-router-dom"
 import Footer from '../layouts/Footer'
 import PostService from "../services/PostService";
@@ -13,6 +12,7 @@ import UserService from '../services/UserService'
 import LikedPostService from '../services/LikedPostService'
 import LikedPostLister from '../utils/LikedPostLister'
 import ProfileNavbar from '../utils/ProfileNavbar'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export default function Profile() {
@@ -33,6 +33,7 @@ export default function Profile() {
 
     const postService = new PostService();
     const likedPostService = new LikedPostService()
+    let authorService = new AuthorService();
 
     function getPostsByAuthorId(pageNo){
         setUserClickLikedPost(false)
@@ -51,13 +52,17 @@ export default function Profile() {
 
     }
 
+    async function getAuhorByUserId() {
+        
+        await authorService.getById(userId).then(result => setAuthor(result.data))
+    }
+
     useEffect(() => { 
-        let authorService = new AuthorService();
 
         getPostsByAuthorId(1);
         postService.getAuthorPostCount(userId).then(result => setNumberOfPosts(result.data))
 
-        authorService.getById(userId).then(result => setAuthor(result.data))
+        getAuhorByUserId();
 
         if(user) {
             likedPostService.getNumberOfUsersLikedPosts(userId, user.token).then(result => setNumberOfUserLikedPosts(result.data))
@@ -68,7 +73,8 @@ export default function Profile() {
 
     function handlePostDelete(postId){
         postService.delete(postId, user.token).then(result => {
-            // Toast
+            toast.error("Post Deleted!")
+
             let newPosts = userPosts.filter(p => p.postId !== postId);
             setUserPost(newPosts)
 
@@ -224,6 +230,8 @@ export default function Profile() {
             </div>
            
         </div>
+                            
+        <ToastContainer />
 
         {/* Delete Modal */}
         <div className="modal fade" id="deleteModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -238,14 +246,14 @@ export default function Profile() {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Cancel <i className="fa-solid fa-close"></i></button>
-                        <button type="button" className="btn btn-danger" onClick={() => { handlePostDelete(postIdForDelete) } }> Delete <i className="fa-solid fa-trash"></i></button>
+                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => { handlePostDelete(postIdForDelete) } }> Delete <i className="fa-solid fa-trash"></i></button>
                     </div>
                 </div>
             </div>
         </div>
 
         {/* Edit Modal */}
-        <div className="modal fade" id="editModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" id="editModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -260,8 +268,12 @@ export default function Profile() {
                             validationSchema={validationSchema}
                             onSubmit={(values) => {
                                 const userService = new UserService();
+                               
                                 userService.updateUser(user.userId, values, user.token).then(result => {
-                                    
+                                    if (result.status === 200){
+                                        toast.success("Profile Updated!")
+                                        getAuhorByUserId()
+                                    }
                                 })
                             }}>
 
@@ -278,7 +290,7 @@ export default function Profile() {
 
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel <i className="fa-solid fa-close"></i></button>
-                                    <button type="sumbit" className="btn btn-primary">Edit <i className="fa-solid fa-pen-to-square"></i> </button>
+                                    <button type="sumbit" className="btn btn-primary"  data-bs-dismiss="modal">Edit <i className="fa-solid fa-pen-to-square"></i> </button>
                                 </div>
                             
                             </Form>

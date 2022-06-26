@@ -13,7 +13,7 @@ export default function ProfileNavbar() {
         setIsLoggedIn(false);
       
         localStorage.clear();
-        navigate("/login");
+        navigate("/");
     }
 
     let handleLoggedIn = () => {
@@ -24,7 +24,7 @@ export default function ProfileNavbar() {
 
   return (
     <div>
-        <nav class="navbar sticky-top navbar-expand-lg bg-dark">
+        <nav class="navbar sticky-top navbar-expand-lg bg-dark"  style={{fontFamily: "sans-serif"}}>
             <div class="container px-4 px-lg-5">
                 
                     <a class="navbar-brand text-white" href="#" onClick={() => navigate("/")}>

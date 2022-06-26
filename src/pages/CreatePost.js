@@ -8,11 +8,14 @@ import { Formik, Form } from 'formik';
 import * as yup from "yup";
 import KaanKaplanTextInput from '../utils/customFormItems/KaanKaplanTextInput';
 import { useSelector } from 'react-redux/es/exports';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreatePost() {
 
-  const userRedux = useSelector(state => state.user)
-  const user = JSON.parse(localStorage.getItem("user"))
+  const postService = new PostService();
+  // const userRedux = useSelector(state => state.user)
+  let user;
+  const navigate = useNavigate()
 
   const [postText, setPostText] = useState("")
   
@@ -23,15 +26,19 @@ export default function CreatePost() {
 
   const validationSchema = yup.object({
     title: yup.string().required("Please Give a Title For Your Post"),
-    description: yup.string().required("Your post must have a simple description"),
+    
   })
   
-  const postService = new PostService();
+  async function getUserFromLocale() {
+    user = await JSON.parse(localStorage.getItem("user"));
+  }
+
+  getUserFromLocale();
 
   return (
     <div>
         <Navbar />
-        <header className="masthead" style={{backgroundImage:`url(${require("../images/office_table.jpg")})`}}>
+        <header className="masthead" style={{backgroundImage:`url(${require("../images/post_detail1.jpg")})`}}>
             <div className="container position-relative px-4 px-lg-5">
                 <div className="row gx-4 gx-lg-5 justify-content-center">
                     <div className="col-md-10 col-lg-8 col-xl-7">
@@ -55,7 +62,7 @@ export default function CreatePost() {
                     postService.add(user.userId, values, user.token).then(result => {
                       
                       if(result.status === 201) {
-                        // Post Detail e git!
+                        navigate("/posts/" + result.data.postId) 
                       }
 
                     }).catch(error => console.log(error))

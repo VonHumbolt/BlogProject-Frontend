@@ -1,6 +1,6 @@
 import React from "react";
-import { Link, useNavigate, useParams, Outlet } from "react-router-dom";
-import image from "../images/blog_9.jpg";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import image from "../images/login_black.jpg";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import KaanKaplanTextInput from "../utils/customFormItems/KaanKaplanTextInput";
@@ -8,6 +8,7 @@ import AuthService from "../services/AuthService";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { addUserToRedux } from "../store/actions/userActions";
 import UserService from "../services/UserService";
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Login() {
 
@@ -36,7 +37,7 @@ export default function Login() {
 
   async function handleLogin(values) {
 
-      const response = await authService.login(values)
+      const response = await authService.login(values).catch((err) => {toast.error("Email or Password is Incorrect", {position: "top-left", theme:"colored"} )})
       if (response.status === 200) {
         await userService.getUserByEmail(values.email).then(result => {
           const user = {
@@ -49,23 +50,21 @@ export default function Login() {
           handleStoreUserInRedux(user)
           localStorage.setItem("user", JSON.stringify(user));
           
-        }).catch(error => console.log(error))
+        })
         
         navigate("/posts")
-      } else {
-        
-      }  
-      
+      } 
 }
 
   return (
     <div>
     <div className="d-md-flex half mt-md-5 mt-lg-0 align-items-center">
       <div className="masthead bg order-md-2 order-sm-2"> <img className="img img-fluid d-none d-sm-block" src={image} onClick={() => navigate("/")} style={{width:"100vh"}} alt="Blog Imnage" />  </div>
+
       <div className="contents order-md-1 order-sm-1">
       
         <div className="container">
-          <div className="row align-items-center justify-content-center">
+          <div className="row align-itmes-center justify-content-center">
             <div className="col-md-7 mt-3" >
               <div className="mb-4">
                   {isFirstLogin.first === "first" ? 
@@ -109,7 +108,7 @@ export default function Login() {
                 </Form>
 
               </Formik>
-                
+                <ToastContainer />
             </div>
           </div>
         </div>

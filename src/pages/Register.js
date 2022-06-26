@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link,useNavigate, Outlet } from 'react-router-dom';
-import image from "../images/blog_9.jpg";
+import image from "../images/register_black.jpg";
 import { Formik, Form } from 'formik';
 import * as yup from "yup";
 import KaanKaplanTextInput from '../utils/customFormItems/KaanKaplanTextInput';

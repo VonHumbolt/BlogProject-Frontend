@@ -26,4 +26,8 @@ export default class LikedPostService {
             }
         });
     }
+
+    getPostLikeCount(postId) {
+        return axios.get(this.url + "getPostLikeCount/" + postId);
+    }
 }

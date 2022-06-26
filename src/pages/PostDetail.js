@@ -6,18 +6,20 @@ import LikedPostService from '../services/LikedPostService';
 import PostService from '../services/PostService';
 import UserService from '../services/UserService';
 import convertDate from '../utils/convertDate';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function PostDetail() {
     let {postId} = useParams();
     let user = JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")) : null
     
     const userService = new UserService();
+    const likedPostService = new LikedPostService();
     const navigate = new useNavigate();
 
+    const [postLikeCount, setPostLikeCount] = useState(0)
     const [isLiked, setIsLiked] = useState(false)
 
     function isUserLikeThisPost(){
-        let likedPostService = new LikedPostService();
         if (user){
             likedPostService.getUserLikedPost(user.userId, postId, user.token).then(result => {
                 if(result.data){
@@ -26,6 +28,7 @@ export default function PostDetail() {
             })
         }
     }
+
     const [post, setPost] = useState({})
     useEffect(() => {
         let postService = new PostService();
@@ -33,6 +36,7 @@ export default function PostDetail() {
             setPost(result.data)
         })
         isUserLikeThisPost()
+        likedPostService.getPostLikeCount(postId).then(result => setPostLikeCount(result.data));
     }, [])
 
     function handleLikeProcess() {
@@ -45,19 +49,19 @@ export default function PostDetail() {
             } else {
                 console.log(postId, user.userId, user.token)
                 userService.likePost(postId, user.userId, user.token).then(result => {
-                    console.log(result.data) // Toast!
+                    toast("Post is Liked", {position: 'bottom-right', theme: "dark"})
                     setIsLiked(true);
                 })
             }
         } else {
-            navigate("/login");
+            toast("You must login for like posts", {position: "bottom-right", theme: "dark"})
         }
     }
 
   return (
     <div>
         <Navbar />
-        <header className="masthead" style={{backgroundImage: `url(${require("../images/blog_1.jpg")})` }} >
+        <header className="masthead" style={{backgroundImage: `url(${require("../images/post_detail2.jpg")})` }} >
             <div className="container position-relative px-4 px-lg-5">
                 <div className="row gx-4 gx-lg-5 justify-content-center">
                     <div className="col-md-10 col-lg-8 col-xl-7">
@@ -77,6 +81,11 @@ export default function PostDetail() {
                                 </a>
                                 on {convertDate(post?.publishedDate)}
                             </span>
+                            <h4 className='meta pt-3'> 
+                                 {postLikeCount === 0 || postLikeCount===1 ? (postLikeCount + " Like" ) :  (postLikeCount + " Likes" ) }
+                                 <i class="fa-solid fa-thumbs-up ps-2"></i>     
+                            </h4>
+                                
                         </div>
                     </div>
                 </div>
@@ -106,7 +115,7 @@ export default function PostDetail() {
       
 
         <Footer />
-
+        <ToastContainer />
     </div>
   )
 }

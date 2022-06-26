@@ -19,7 +19,7 @@ export default function Navbar() {
         setIsLoggedIn(false);
         dispatch(removeUserToRedux(userRedux))
         localStorage.clear();
-        navigate("/login");
+        navigate("/");
     }
 
     let handleLoggedIn = () => {

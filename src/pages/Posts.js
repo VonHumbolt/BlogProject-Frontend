@@ -20,7 +20,7 @@ export default function Posts() {
                 postService.filterByTitle(searchText.toLowerCase()).then(result => 
                     setPosts(result.data)
                 )
-            }, 2000)
+            }, 1500)
         } else{
             getSortedPost(1)
         }
@@ -63,13 +63,13 @@ export default function Posts() {
   return (
       <div>
         <Navbar />
-        <header className="masthead" style={{backgroundImage:`url(${require("../images/blog_6.jpg")})`}}>
+        <header className="masthead" style={{backgroundImage:`url(${require("../images/create_post.jpg")})`}}>
             <div className="container position-relative px-4 px-lg-5">
                 <div className="row gx-4 gx-lg-5 justify-content-center">
                     <div className="col-md-10 col-lg-8 col-xl-7">
                         <div className="site-heading">
                             <h1>Blog Posts</h1>
-                            <span className="subheading">A Blog Theme by Start Bootstrap</span>
+                            <span className="subheading">Blog-App Created by Kaan Kaplan</span>
                         </div>
                        
                     </div>

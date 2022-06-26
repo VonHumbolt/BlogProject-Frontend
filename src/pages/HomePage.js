@@ -46,10 +46,6 @@ export default function HomePage() {
             </div>
 
             <section className="text-light bg-dark">
-                {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                    <path fill="#273036" fillOpacity="1" d="M0,224L60,192C120,160,240,96,360,106.7C480,117,600,203,720,213.3C840,224,960,160,1080,133.3C1200,107,1320,117,1380,122.7L1440,128L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
-                    </path>
-                </svg> */}
                 <h1 className='text-center'>EXPLORE POSTS WHICH ABOUT DIFFERENT TOPICS</h1>
                 <div className="container mt-5">
                     <div className="row justify-content-between align-items-center g-2">
@@ -60,8 +56,8 @@ export default function HomePage() {
                                 Many authors share about the topics they are interested in. You can like the ones you like by reading these posts.
                                 Join now and discover posts on different topics
                             </p>
-                            <button className="btn btn-primary my-2" onClick={() => navigate("/posts")}>Get Started</button>
                             <button className="btn btn-primary my-2 mx-2" onClick={() => navigate("/login")}>Sign In</button>
+                            <button className="btn btn-primary my-2" onClick={() => navigate("/posts")}>Get Started <i class="fa-solid fa-chevron-right"></i></button>
 
                         </div>
                         <div className="col-md text-center">
