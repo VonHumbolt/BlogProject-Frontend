@@ -38,7 +38,7 @@ export default function LikedPostLister(props) {
         {userLikedPosts.map(post => (
             <div className='row' key={post.post.postId}>
                 <div className="post-preview col-sm-10">
-                    <a href="#">
+                    <a>
                                 <Link
                                     to={`/posts/${post.post.postId}`}
                                 >
@@ -62,7 +62,7 @@ export default function LikedPostLister(props) {
                     <div className='row'>
                         {pageNo > 1 ?
                             <div className='col'>
-                                <div className="d-flex justify-content-start mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getPreviousPosts()}>
+                                <div className="d-flex justify-content-start mb-4"><a className="btn btn-primary text-uppercase" onClick={()=> getPreviousPosts()}>
                                         <i class="fa-solid fa-left-long"></i>Previous Posts
                                     </a>
                                 </div>
@@ -71,8 +71,8 @@ export default function LikedPostLister(props) {
                         : null}
                         {(Math.ceil(props.numberOfLikedPosts / 5) !== pageNo && props.numberOfLikedPosts !== 0) ?
                             <div className='col'>
-                                <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getOlderPosts()}>
-                                        Older Posts <i class="fa-solid fa-right-long"></i>
+                                <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" onClick={()=> getOlderPosts()}>
+                                        Older <i class="fa-solid fa-right-long"></i>
                                     </a>
                                 </div>
                             </div>

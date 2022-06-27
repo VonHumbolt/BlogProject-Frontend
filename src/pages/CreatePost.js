@@ -14,7 +14,7 @@ export default function CreatePost() {
 
   const postService = new PostService();
   // const userRedux = useSelector(state => state.user)
-  let user;
+  let user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate()
 
   const [postText, setPostText] = useState("")
@@ -28,12 +28,6 @@ export default function CreatePost() {
     title: yup.string().required("Please Give a Title For Your Post"),
     
   })
-  
-  async function getUserFromLocale() {
-    user = await JSON.parse(localStorage.getItem("user"));
-  }
-
-  getUserFromLocale();
 
   return (
     <div>

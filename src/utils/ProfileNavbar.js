@@ -27,7 +27,7 @@ export default function ProfileNavbar() {
         <nav class="navbar sticky-top navbar-expand-lg bg-dark"  style={{fontFamily: "sans-serif"}}>
             <div class="container px-4 px-lg-5">
                 
-                    <a class="navbar-brand text-white" href="#" onClick={() => navigate("/")}>
+                    <a class="navbar-brand text-white" onClick={() => navigate("/")}>
                         BLOG-APP
                     </a>
                 <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,7 @@ export default function ProfileNavbar() {
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <ul className="navbar-nav ms-auto py-4 py-lg-0 text-white">
                         <li className="nav-item">
-                            <a className="nav-link px-lg-3 py-3 py-lg-4 text-white" href='#' onClick={() => navigate("/posts")}>
+                            <a className="nav-link px-lg-3 py-3 py-lg-4 text-white" onClick={() => navigate("/posts")}>
                                 ARTICLES
                             </a>
                         </li>
@@ -45,23 +45,23 @@ export default function ProfileNavbar() {
 
                         {isLoggedIn ?  
                             (<ul className="navbar-nav ms-auto py-4 py-lg-0">
-                                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4 text-white" href='#' onClick={() => navigate(`/profile/${user.userId}`)}>
+                                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4 text-white" onClick={() => navigate(`/profile/${user.userId}`)}>
                                 
                                     PROFILE
                                 
                                     </a></li>
-                                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4 text-white" href='#' onClick={() => navigate("/createPost")}>
+                                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4 text-white" onClick={() => navigate("/createPost")}>
                                 
                                         CREATE POST
                                     </a></li>
-                                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4 text-white" onClick={() => handleLoggedOut()} href='#'>LOG OUT</a></li>
+                                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4 text-white" onClick={() => handleLoggedOut()}>LOG OUT</a></li>
                             </ul>) : 
                             <ul className="navbar-nav ms-auto py-4 py-lg-0">
-                                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4 text-white" onClick={() => handleLoggedIn()} href='#'>
+                                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4 text-white" onClick={() => handleLoggedIn()}>
                                         LOGIN
                                 </a>
                                 </li>
-                                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4 text-white" href='#' onClick={() => navigate("/register")}>
+                                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4 text-white" onClick={() => navigate("/register")}>
                                         REGISTER
                                 </a>
                                 </li>

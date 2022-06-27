@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, Outlet} from 'react-router-dom'
+import { Link, Outlet, useNavigate} from 'react-router-dom'
 import {useParams} from "react-router-dom"
 import Footer from '../layouts/Footer'
 import PostService from "../services/PostService";
@@ -19,7 +19,9 @@ export default function Profile() {
 
     let {userId} = useParams()
     let user = JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")) : null
-
+    
+    const navigate = useNavigate();
+    
     const [isUserProfile, setIsUserProfile] = useState( user ? userId == user.userId : false)
     const [userClickLikedPost, setUserClickLikedPost] = useState(null)
 
@@ -127,7 +129,7 @@ export default function Profile() {
                         <h1>{author.firstName + " " + author.lastName + "'s"} Profile</h1>
                         
                         <div className='col d-flex align-items-center justify-content-between'>
-                            <a href="#" id="allPostButton" className="btn btn-primary btn-sm" onClick={() => getPostsByAuthorId(1)}> <span className="subheading">All Posts of Author  -  {numberOfPosts} Post</span> </a>
+                            <a id="allPostButton" className="btn btn-primary btn-sm" onClick={() => getPostsByAuthorId(1)}> <span className="subheading">All Posts of Author  -  {numberOfPosts} Post</span> </a>
                             {isUserProfile ? 
 
                                 <button id="likedButton" type="button" className="btn btn-outline-primary btn-sm position-relative"  onClick={() => handleUsersLikePost()}>
@@ -151,18 +153,18 @@ export default function Profile() {
 
                                 <div className='row' key={post.postId}>
                                     <div className="post-preview col-sm-10">
-                                        <a href="#">
+                                        <a>
                                                     <Link
                                                         to={`/posts/${post.postId}`}
                                                     >
                                                         <h2 className="post-title">{post.title}</h2>
                                                     </Link>
-                                                        <h3 className="post-subtitle">{post.description}</h3>
+                                                        <h3 className="post-subtitle" onClick={() => navigate("/posts/" + post.postId)}>{post.description}</h3>
                                         
                                                     </a>
                                                 <p className="post-meta">
                                                     Posted by
-                                                        <a href="#!">{" " + post?.author?.firstName + " " + post?.author?.lastName + " " }</a>
+                                                        <a>{" " + post?.author?.firstName + " " + post?.author?.lastName + " " }</a>
 
                                                     on {convertDate(post.publishedDate)}
                                                 </p>
@@ -188,7 +190,7 @@ export default function Profile() {
                     <div className='row'>
                         {pageNo > 1 ?
                             <div className='col'>
-                                <div className="d-flex justify-content-start mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getPreviousPosts()}>
+                                <div className="d-flex justify-content-start mb-4"><a className="btn btn-primary text-uppercase" onClick={()=> getPreviousPosts()}>
                                         <i class="fa-solid fa-left-long"></i>Previous Posts
                                     </a>
                                 </div>
@@ -197,8 +199,8 @@ export default function Profile() {
                         : null}
                         {(Math.ceil(numberOfPosts / 5) !== pageNo && numberOfPosts !== 0) ?
                             <div className='col'>
-                                <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getOlderPosts()}>
-                                        Older Posts <i class="fa-solid fa-right-long"></i>
+                                <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" onClick={()=> getOlderPosts()}>
+                                        Older <i class="fa-solid fa-right-long"></i>
                                     </a>
                                 </div>
                             </div>
@@ -219,7 +221,7 @@ export default function Profile() {
                       <p className="card-text"><i><strong> Posts: </strong> {numberOfPosts} </i> </p>
                       <div className="card-footer d-flex justify-content-center align-items-center mt-1">
                         {isUserProfile ?
-                            <a href="#" className="btn btn-primary align-items-end" data-bs-toggle="modal" data-bs-target="#editModal" >Edit <i className="fa-solid fa-pen-to-square"></i></a>
+                            <a className="btn btn-primary align-items-end" data-bs-toggle="modal" data-bs-target="#editModal" >Edit <i className="fa-solid fa-pen-to-square"></i></a>
                         : null}  
                          
                     

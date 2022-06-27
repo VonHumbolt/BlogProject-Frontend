@@ -23,7 +23,7 @@ export default function EditPost() {
             setPost(result.data)
         })
 
-    }, {})
+    }, [])
 
     const initValues={
         title:post?.title,  
@@ -33,8 +33,7 @@ export default function EditPost() {
     const [postText, setPostText] = useState(post.content) 
 
     const validationSchema = yup.object({
-        title: yup.string().required("Please Give a Title For Your Post"),
-        description: yup.string().required("Your post must have a simple description"),
+        title: yup.string().required("Please Give a Title For Your Post")
     })
   
   return (

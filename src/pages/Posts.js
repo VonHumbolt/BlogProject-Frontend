@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Outlet, Link} from "react-router-dom"
+import {Outlet, Link, useNavigate} from "react-router-dom"
 import Footer from '../layouts/Footer'
 import Navbar from '../layouts/Navbar'
 import PostService from '../services/PostService'
@@ -12,6 +12,7 @@ export default function Posts() {
     const [pageNo, setPageNo] = useState(1)
     const [searchText, setSearchText] = useState("")
 
+    const navigate = useNavigate()
     const [posts, setPosts] = useState([])
 
     async function handleSearch() {
@@ -96,17 +97,17 @@ export default function Posts() {
                     {posts.length === 0 ? <div className='justify-content-center text-center'> <h1>Search Result  <i className="fa fa-search"></i> </h1>  <h3> No posts found...</h3> </div> : null}
                     {posts.map(post => (
                         <div className="post-preview" key={post.postId}>
-                        <a href="#">
+                        <a>
                         <Link
                             style={{ display: "block", margin: "1rem 0",  }}
                             to={`/posts/${post.postId}`}>
                             <h2 className="post-title">{post?.title}</h2>
                         </Link>
-                            <h3 className="post-subtitle">{post?.description}</h3>
+                            <h3 className="post-subtitle" onClick={() => navigate("/posts/" + post.postId)}>{post?.description}</h3>
                         </a>
                             <p className="post-meta">
                                 Posted by
-                                    <a href="#!">
+                                    <a>
                                         <Link style={{textDecoration:"none"}}
                                             to={`/profile/${post?.author?.userId}`}>
                                         
@@ -119,59 +120,11 @@ export default function Posts() {
                             <hr className="my-4" />
                         </div>
                     ))}
-                    {/* <div className="post-preview">
-                        <a href="post.html">
-                        <Link
-                            style={{ display: "block", margin: "1rem 0",  }}
-                            to={`/posts/1`}>
-                            <h2 className="post-title">Man must explore, and this is exploration at its greatest</h2>
-                        </Link>
-                            <h3 className="post-subtitle">Problems look mighty small from 150 miles up</h3>
-                        </a>
-                        <p className="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on September 24, 2022
-                        </p>
-                    </div>
-                    <hr className="my-4" />
-                    <div className="post-preview">
-                        <a href="post.html"><h2 className="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
-                        <p className="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on September 18, 2022
-                        </p>
-                    </div>
-                    <hr className="my-4" />
-                    <div className="post-preview">
-                        <a href="post.html">
-                            <h2 className="post-title">Science has not yet mastered prophecy</h2>
-                            <h3 className="post-subtitle">We predict too much for the next year and yet far too little for the next ten.</h3>
-                        </a>
-                        <p className="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on August 24, 2022
-                        </p>
-                    </div>
-                    <hr className="my-4" />
-                    <div className="post-preview">
-                        <a href="post.html">
-                            <h2 className="post-title">Failure is not an option</h2>
-                            <h3 className="post-subtitle">Many say exploration is part of our destiny, but it’s actually our duty to future generations.</h3>
-                        </a>
-                        <p className="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on July 8, 2022
-                        </p>
-                    </div>
-                    <hr className="my-4" /> */}
+                   
                     <div className='row'>
                         {pageNo > 1 ?
                             <div className='col'>
-                                <div className="d-flex justify-content-start mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getPreviousPosts()}>
+                                <div className="d-flex justify-content-start mb-4"><a className="btn btn-primary text-uppercase" onClick={()=> getPreviousPosts()}>
                                     <i class="fa-solid fa-left-long"></i> Previous
                                 </a></div>
 
@@ -180,8 +133,8 @@ export default function Posts() {
                         {numberOfPosts === 0 ? <div> <h3>There is no posts...</h3></div> : null}
                         {(Math.ceil(numberOfPosts / 5) !== pageNo && numberOfPosts !== 0) ?
                             <div className='col'>
-                                <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" href="#" onClick={()=> getOlderPosts()}>
-                                    Older Posts <i class="fa-solid fa-right-long"></i>
+                                <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" onClick={()=> getOlderPosts()}>
+                                    Older <i class="fa-solid fa-right-long"></i>
                                 </a></div>
                             </div>
                         :null}

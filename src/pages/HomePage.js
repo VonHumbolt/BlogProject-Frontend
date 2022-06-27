@@ -13,7 +13,7 @@ export default function HomePage() {
                 <nav class="navbar navbar-expand-lg" style={{backgroundColor: "#273036", fontFamily: "sans-serif"}}>
                     <div class="container px-4 px-lg-5">
                         
-                            <a class="navbar-brand text-white" href="#" onClick={() => navigate("/")}>
+                            <a class="navbar-brand text-white" onClick={() => navigate("/")}>
                                 <h1>BLOG-APP</h1> 
                             </a>
                         <button class="navbar-toggler text-white" style={{border: "1px solid transparent", borderColor:"white"}} type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,16 +23,16 @@ export default function HomePage() {
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <ul className="navbar-nav ms-auto py-4 py-lg-0 text-white">
                                 <li className="nav-item">
-                                    <a className="nav-link px-lg-3 py-3 py-lg-4 text-white" href='#' onClick={() => navigate("/posts")}>
+                                    <a className="nav-link px-lg-3 py-3 py-lg-4 text-white" onClick={() => navigate("/posts")}>
                                         <h4> ARTICLES </h4>
                                     </a>
                                 </li>
-                                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4 text-white" href='#' onClick={() => navigate("/login")}>
+                                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4 text-white" onClick={() => navigate("/login")}>
                                     <h4>
                                         LOGIN
                                     </h4>
                                 </a></li>
-                                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4 text-white" href='#' onClick={() => navigate("/register")}>
+                                <li className="nav-item"><a className="nav-link px-lg-3 py-3 py-lg-4 text-white" onClick={() => navigate("/register")}>
                                     <h4>
                                         REGISTER
                                     </h4>

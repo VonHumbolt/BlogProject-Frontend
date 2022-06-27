@@ -70,7 +70,7 @@ export default function PostDetail() {
                             <h2 className="subheading">{post?.description}</h2>
                             <span className="meta">
                                 Posted by
-                                <a href="#!">
+                                <a>
                                     <u>
                                         <Link
                                             to={`/profile/${post?.author?.userId}`}>
