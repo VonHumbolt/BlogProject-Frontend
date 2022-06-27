@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export default class LikedPostService {
-    url = "http://localhost:8080/api/v1/likedPosts/"
+    url = "https://blog-app-spring-project.herokuapp.com/api/v1/likedPosts/"
 
     getUserLikedPost(userId, postId, token) {
         return axios.get(this.url + "getUserLikedPost/" + userId + "/" + postId, {

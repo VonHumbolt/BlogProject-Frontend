@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default class AuthorService{
 
-    url =  "http://localhost:8080/api/v1/authors/";
+    url =  "https://blog-app-spring-project.herokuapp.com/api/v1/authors/";
 
     getall() {
         return axios.get(this.url + "getall");

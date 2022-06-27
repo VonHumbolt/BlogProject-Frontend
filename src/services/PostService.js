@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default class PostService{
     
-    url = "http://localhost:8080/api/v1/posts/";
+    url = "https://blog-app-spring-project.herokuapp.com/api/v1/posts/";
 
     getall() {
         return axios.get(this.url + "getall");
