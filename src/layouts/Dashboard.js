@@ -42,9 +42,9 @@ export default function Dashboard() {
             } />
         
             <Route path="edit/:postId" element={
-              <ProtectedRoute user={user}>
+              // <ProtectedRoute user={user}>
                 <EditPost />
-              </ProtectedRoute>
+              // </ProtectedRoute>
             } />
 
             <Route

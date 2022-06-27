@@ -84,7 +84,7 @@ export default function Posts() {
                         {/* Filter Posts */}
                         <div className="row g-2 mb-5">
                             <div className="col-sm-9">
-                                <i className="fa fa-search ps-2 py-2" style={{position:"absolute"}}></i><input type="email" className="form-control rounded-pill ps-5" onKeyUp={() => handleSearch()} id="floatingInputGrid" placeholder="Search Post..." value={searchText} onChange={(e) => setSearchText(e.target.value)} style={{borderColor: "darkblue"}} />
+                                <i className="fa fa-search ps-2 py-2" style={{position:"absolute"}}></i><input type="text" className="form-control rounded-pill ps-5" onKeyUp={() => handleSearch()} id="floatingInputGrid" placeholder="Search Post..." value={searchText} onChange={(e) => setSearchText(e.target.value)} style={{borderColor: "darkblue"}} />
                             </div>
                             <div className="col-sm-3">
                                 <select className="form-select rounded-pill" id="filterBox" onChange={() => handlingFilterSelectBox()} style={{borderColor: "darkblue"}}>
